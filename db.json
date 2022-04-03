@@ -3,9 +3,20 @@
     {
       "id": 1,
       "usuario": "frecalde",
-      "password": "cambiar123",
+      "password": "$2b$10$KzMp6YSkaTvhbgQYlGmDkOR.nONjGXqEieENuhAfmH.JaTtFxQRwK",
+      "activo": true
+    },
+    {
+      "id": 2,
+      "usuario": "usuario",
+      "password": "$2b$10$sAe0f48frE99F0BwrQnaJOcjtgw0JExhOXTDwluigTWgzbhUqC8di",
+      "activo": true
+    },
+    {
+      "id": 3,
+      "usuario": "usuarioedge",
+      "password": "$2b$10$AGn2Nf1GgcfOmw4D.ijHGOXL4ewpe2kHif4hTrXGHih7aLShySCQa",
       "activo": true
     }
-  ],
-  "usuario_sqc": 1
+  ]
 }

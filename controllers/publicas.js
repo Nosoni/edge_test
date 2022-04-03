@@ -14,11 +14,11 @@ module.exports = {
 
       const user = await obtenerPorUsuario(usuario)
 
-      if (!user) {
+      if (user.length == 0) {
         return res.status(404).send("No existe el usuario.")
       }
 
-      let mach = bcrypt.compareSync(password, user.password);
+      let mach = bcrypt.compareSync(password, user[0].password);
       if (!mach) {
         return res.status(401).send("Contraseña ingresada inválida.")
       }
@@ -27,11 +27,11 @@ module.exports = {
         expiresIn: config.tokenExpirationTime
       });
 
-      delete user.password;
+      delete user[0].password;
 
-      return res.status(200).json({ ...user, token })
+      return res.status(200).json({ usuario: user[0], token })
     } catch (error) {
-      return res.status(500).send({ mensaje: error.message })
+      return res.status(500).send(error.message)
     }
   },
   async crear(req, res) {

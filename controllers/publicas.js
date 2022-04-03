@@ -56,7 +56,7 @@ module.exports = {
       const hash = await bcrypt.hash(password, 10);
       const usuario_creado = await crearUsuario({ usuario, password: hash, activo: true })
 
-      return res.status(201).json({ ...usuario_creado, usuario, password: hash, activo: true })
+      return res.status(201).json({ ...usuario_creado, usuario, activo: true })
     } catch (error) {
       return res.status(500).json(error.message)
     }

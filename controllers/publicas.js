@@ -49,15 +49,17 @@ module.exports = {
       }
 
       await getUser(usuario).then(response => {
+        console.log(response)
         if (response) {
           return res.status(409).send("Ya existe dicho usuario.")
         }
       })
 
       const hash = await bcrypt.hash(password, 10);
-      await createUser({ usuario, password: hash, activo: true }).then(response => {
-        return res.status(201).json(response)
-      })
+      return res.status(201).json({ usuario, password: hash, activo: true })
+      // await createUser({ usuario, password: hash, activo: true }).then(response => {
+      //   return res.status(201).json(response)
+      // })
     } catch (error) {
       return res.status(500).json(error.message)
     }

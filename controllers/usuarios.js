@@ -1,19 +1,21 @@
-const axios = require("axios");
 const { fakeUrlDB } = require("../configuraciones");
-const service = 'usuario'
+const axios = require("axios").create({ baseUrl: "https://my-json-server.typicode.com/nosoni/edge_test/" });
+const service = 'usuarios'
 
 module.exports = {
   async getUser(usuario) {
-    return axios.post(`${fakeUrlDB}/${service}`, {
-      usuario
-    })
+    var axios = require('axios');
+
+    var config = {
+      method: 'get',
+      url: 'usuarios',
+      headers: {}
+    };
+
+    const respuesta = await axios(config)
+    return respuesta
   },
   async createUser(usuario) {
-    const secuencia = axios.get(`${fakeUrlDB}/usuario_sqc`)
-    console.log(secuencia)
-    return axios.post(`${fakeUrlDB}/${service}`, {
-      id: secuencia, ...usuario
-    })
   },
   async filtrar(req, res) {
 

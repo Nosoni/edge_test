@@ -14,6 +14,9 @@ app.use(cors())
 
 //rutas
 app.use(publicas)
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 app.use(privadas)
 
 app.listen(config.port, () => {

@@ -48,19 +48,10 @@ module.exports = {
         return res.status(500).send("Logitud de contraseña inválida.")
       }
 
-<<<<<<< HEAD
-      await getUser(usuario).then(response => {
-        console.log(response)
-        if (response) {
-          return res.status(409).send("Ya existe dicho usuario.")
-        }
-      })
-=======
       const user = await getUser(usuario)
       if (user) {
         return res.status(409).send("Ya existe dicho usuario.")
       }
->>>>>>> develop
 
       const hash = await bcrypt.hash(password, 10);
       return res.status(201).json({ usuario, password: hash, activo: true })

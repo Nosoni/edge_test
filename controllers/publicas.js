@@ -38,6 +38,11 @@ module.exports = {
     try {
       const { usuario, password, confirmar } = req.body;
 
+      const user = await obtenerPorUsuario(usuario)
+      if (user.length > 0) {
+        return res.status(409).send("Ya existe dicho usuario.")
+      }
+
       if (!usuario || !password || !confirmar) {
         return res.status(400).send("Verificar la información enviada.")
       }
@@ -48,13 +53,9 @@ module.exports = {
         return res.status(500).send("Logitud de contraseña inválida.")
       }
 
-      const user = await obtenerPorUsuario(usuario)
-      if (user.length > 0) {
-        return res.status(409).send("Ya existe dicho usuario.")
-      }
-
       const hash = await bcrypt.hash(password, 10);
       const usuario_creado = await crearUsuario({ usuario, password: hash, activo: true })
+
       return res.status(201).json({ ...usuario_creado, usuario, password: hash, activo: true })
     } catch (error) {
       return res.status(500).json(error.message)

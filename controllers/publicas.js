@@ -12,13 +12,13 @@ module.exports = {
         return res.status(400).send("Verificar la información enviada.")
       }
 
-      const existe = await getUser(usuario)
+      const user = await getUser(usuario)
 
-      if (!existe) {
+      if (!user) {
         return res.status(404).send("No existe el usuario.")
       }
 
-      let mach = await bcrypt.compareSync(password, existe.password);
+      let mach = bcrypt.compareSync(password, user.password);
       if (!mach) {
         return res.status(401).send("Contraseña ingresada inválida.")
       }
@@ -27,9 +27,9 @@ module.exports = {
         expiresIn: config.tokenExpirationTime
       });
 
-      delete existe.password;
+      delete user.password;
 
-      return res.status(200).json({ ...existe, token })
+      return res.status(200).json({ ...user, token })
     } catch (error) {
       return res.status(500).send({ mensaje: error.message })
     }
@@ -48,11 +48,10 @@ module.exports = {
         return res.status(500).send("Logitud de contraseña inválida.")
       }
 
-      await getUser(usuario).then(response => {
-        if (response) {
-          return res.status(409).send("Ya existe dicho usuario.")
-        }
-      })
+      const user = await getUser(usuario)
+      if (user) {
+        return res.status(409).send("Ya existe dicho usuario.")
+      }
 
       const hash = await bcrypt.hash(password, 10);
       await createUser({ usuario, password: hash, activo: true }).then(response => {

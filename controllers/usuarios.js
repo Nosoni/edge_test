@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { fakeUrlDB } = require("../configuraciones");
+<<<<<<< Updated upstream
 const service = 'usuario'
 
 module.exports = {
@@ -7,6 +8,22 @@ module.exports = {
     return axios.post(`${fakeUrlDB}/${service}`, {
       usuario
     })
+=======
+const axios = require("axios");
+const service = 'usuarios'
+
+module.exports = {
+  async getUser(usuario) {
+    var config = {
+      method: 'get',
+      headers: {
+        'content-type': 'application/json',
+      },
+      url: `${fakeUrlDB}/${service}`,
+    };
+
+    return await axios(config).then(response => response.data)
+>>>>>>> Stashed changes
   },
   async createUser(usuario) {
     const secuencia = axios.get(`${fakeUrlDB}/usuario_sqc`)

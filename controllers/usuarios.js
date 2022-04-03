@@ -59,7 +59,13 @@ module.exports = {
       servicio: `${servicio}`,
     };
 
-    return res.status(200).send(await peticion(config))
+    const usuarios_listados = await peticion(config)
+      .then(response => response.map(usuario => {
+        delete usuario.password
+        return usuario
+      }))
+
+    return res.status(200).send(usuarios_listados)
   },
   async editar(req, res) {
     if (!req.body.id) {

@@ -17,7 +17,7 @@ async function requiereAutenticacion(req, res, next) {
 
     const token = bearerHeader.split(' ')[1]
 
-    await jwt.verify(token, req.app.get(secretKey), (err, decoded) => {
+    jwt.verify(token, req.app.get(secretKey), (err, decoded) => {
       if (err) {
         return res.status(401).send("Token expirado.")
       }

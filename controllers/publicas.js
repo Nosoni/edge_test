@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const config = require('../configuraciones/index')
-const { getUser, createUser } = require("./usuarios")
+const { obtenerPorUsuario, crearUsuario } = require("./usuarios")
 
 module.exports = {
   async login(req, res) {
@@ -12,13 +12,13 @@ module.exports = {
         return res.status(400).send("Verificar la información enviada.")
       }
 
-      const user = await getUser(usuario)
+      const user = await obtenerPorUsuario(usuario)
 
-      if (!user) {
+      if (user.length == 0) {
         return res.status(404).send("No existe el usuario.")
       }
 
-      let mach = bcrypt.compareSync(password, user.password);
+      let mach = bcrypt.compareSync(password, user[0].password);
       if (!mach) {
         return res.status(401).send("Contraseña ingresada inválida.")
       }
@@ -27,16 +27,21 @@ module.exports = {
         expiresIn: config.tokenExpirationTime
       });
 
-      delete user.password;
+      delete user[0].password;
 
-      return res.status(200).json({ ...user, token })
+      return res.status(200).json({ usuario: user[0], token })
     } catch (error) {
-      return res.status(500).send({ mensaje: error.message })
+      return res.status(500).send(error.message)
     }
   },
   async crear(req, res) {
     try {
       const { usuario, password, confirmar } = req.body;
+
+      const user = await obtenerPorUsuario(usuario)
+      if (user.length > 0) {
+        return res.status(409).send("Ya existe dicho usuario.")
+      }
 
       if (!usuario || !password || !confirmar) {
         return res.status(400).send("Verificar la información enviada.")
@@ -48,16 +53,10 @@ module.exports = {
         return res.status(500).send("Logitud de contraseña inválida.")
       }
 
-      const user = await getUser(usuario)
-      if (user) {
-        return res.status(409).send("Ya existe dicho usuario.")
-      }
-
       const hash = await bcrypt.hash(password, 10);
-      return res.status(201).json({ usuario, password: hash, activo: true })
-      // await createUser({ usuario, password: hash, activo: true }).then(response => {
-      //   return res.status(201).json(response)
-      // })
+      const usuario_creado = await crearUsuario({ usuario, password: hash, activo: true })
+
+      return res.status(201).json({ ...usuario_creado, usuario, password: hash, activo: true })
     } catch (error) {
       return res.status(500).json(error.message)
     }

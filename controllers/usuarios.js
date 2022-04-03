@@ -1,25 +1,24 @@
-const { fakeUrlDB } = require("../configuraciones");
 const axios = require("axios");
-const service = 'usuarios'
+const servicio = 'usuarios'
+const { peticion } = require("../helpers");
 
 module.exports = {
-  async getUser(usuario) {
+  async obtenerPorUsuario(usuario) {
     var config = {
       method: 'get',
-      headers: {
-        'content-type': 'application/json',
-      },
-      url: `${fakeUrlDB}/${service}`,
+      servicio: `${servicio}?usuario=${usuario}`,
     };
 
-    return await axios(config).then(response => response.data)
+    return await peticion(config)
   },
-  async createUser(usuario) {
-    const secuencia = axios.get(`${fakeUrlDB}/usuario_sqc`)
-    console.log(secuencia)
-    return axios.post(`${fakeUrlDB}/${service}`, {
-      id: secuencia, ...usuario
-    })
+  async crearUsuario(usuario) {
+    var config = {
+      method: 'post',
+      servicio: `${servicio}`,
+      body: JSON.stringify(usuario)
+    };
+
+    return await peticion(config)
   },
   async filtrar(req, res) {
 

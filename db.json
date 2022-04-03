@@ -1,10 +1,11 @@
 {
-  "usuario": [
+  "usuarios": [
     {
       "id": 1,
       "usuario": "frecalde",
       "password": "cambiar123",
       "activo": true
     }
-  ]
+  ],
+  "usuario_sqc": 1
 }

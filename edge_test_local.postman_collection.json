@@ -1,0 +1,610 @@
+{
+	"info": {
+		"_postman_id": "c5d3f88c-f61d-484e-9013-be1ae31e83cc",
+		"name": "edge_test_local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login exitoso",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"usuario\": \"frecalde\",\n    \"password\": \"frecalde\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Petición de autenticación"
+			},
+			"response": []
+		},
+		{
+			"name": "Login usuario invalido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"usuario\": \"prueba\",\n    \"password\": \"prueba\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Petición de autenticación rechazada por usuario inválido"
+			},
+			"response": []
+		},
+		{
+			"name": "Login contraseña invalida",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"usuario\": \"frecalde\",\n    \"password\": \"errorenpassword\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Petición de autenticación rechazada por contraseña inválida"
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion usuario exitoso",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZnJlY2FsZGUiLCJwYXNzd29yZCI6ImZyZWNhbGRlIiwiaWF0IjoxNjQ5MDI2NjA5LCJleHAiOjE2NDkwMzAyMDl9.AJqI5OQy_JSxvxHQusUIZU0jnKzk3YNbZSfLwtJ75DI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"usuario\": \"nuevousuario\",\n    \"password\": \"nuevousuario\",\n    \"confirmar\": \"nuevousuario\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"crear"
+					]
+				},
+				"description": "Creación de usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion usuario con error, usuario existente",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZnJlY2FsZGUiLCJwYXNzd29yZCI6ImZyZWNhbGRlIiwiaWF0IjoxNjQ5MDI2NjA5LCJleHAiOjE2NDkwMzAyMDl9.AJqI5OQy_JSxvxHQusUIZU0jnKzk3YNbZSfLwtJ75DI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"usuario\": \"frecalde\",\n    \"password\": \"frecalde\",\n    \"confirmar\": \"frecalde\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"crear"
+					]
+				},
+				"description": "Creación de usuario con error. Usuario existente"
+			},
+			"response": []
+		},
+		{
+			"name": "Creacion usuario con error, contraseñas no coinciden",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZnJlY2FsZGUiLCJwYXNzd29yZCI6ImZyZWNhbGRlIiwiaWF0IjoxNjQ5MDI2NjA5LCJleHAiOjE2NDkwMzAyMDl9.AJqI5OQy_JSxvxHQusUIZU0jnKzk3YNbZSfLwtJ75DI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"usuario\": \"nuevousuario\",\n    \"password\": \"nuevousuario\",\n    \"confirmar\": \"nuevo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"crear"
+					]
+				},
+				"description": "Creación de usuario con error. Las contraseñas no coinciden."
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios filtrar exitoso",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZnJlY2FsZGUiLCJwYXNzd29yZCI6ImZyZWNhbGRlIiwiaWF0IjoxNjQ5MDMxMzQ5LCJleHAiOjE2NDkwMzQ5NDl9.hgvXI9gXF1PSe1SCjSBoFCw0IGUEvzkNpOnHLHheBNU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"usuario\": \"frecalde\",\n    \"activo\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/usuarios/filtrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"usuarios",
+						"filtrar"
+					]
+				},
+				"description": "El filtrado puede realizarse por todas las propiedades del usuario a excepción de la contraseña"
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios filtrar petición inválida",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZnJlY2FsZGUiLCJwYXNzd29yZCI6ImZyZWNhbGRlIiwiaWF0IjoxNjQ5MDMxMzQ5LCJleHAiOjE2NDkwMzQ5NDl9.hgvXI9gXF1PSe1SCjSBoFCw0IGUEvzkNpOnHLHheBNU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/usuarios/filtrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"usuarios",
+						"filtrar"
+					]
+				},
+				"description": "El filtrado puede realizarse por todas las propiedades del usuario a excepción de la contraseña"
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios listar exitoso",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZnJlY2FsZGUiLCJwYXNzd29yZCI6ImZyZWNhbGRlIiwiaWF0IjoxNjQ5MDMxMzQ5LCJleHAiOjE2NDkwMzQ5NDl9.hgvXI9gXF1PSe1SCjSBoFCw0IGUEvzkNpOnHLHheBNU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/usuarios/listar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"usuarios",
+						"listar"
+					]
+				},
+				"description": "Lista todos los usuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario edición exitoso",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZnJlY2FsZGUiLCJwYXNzd29yZCI6ImZyZWNhbGRlIiwiaWF0IjoxNjQ5MDMxMzQ5LCJleHAiOjE2NDkwMzQ5NDl9.hgvXI9gXF1PSe1SCjSBoFCw0IGUEvzkNpOnHLHheBNU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"usuario\": \"frecalde\",\n    \"password\": \"frecalde\",\n    \"confirmar\": \"frecalde\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/usuarios/editar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"usuarios",
+						"editar"
+					]
+				},
+				"description": "Edición de usuario exitoso"
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario edición con error, no se logra identificar usuario",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZnJlY2FsZGUiLCJwYXNzd29yZCI6ImZyZWNhbGRlIiwiaWF0IjoxNjQ5MDMxMzQ5LCJleHAiOjE2NDkwMzQ5NDl9.hgvXI9gXF1PSe1SCjSBoFCw0IGUEvzkNpOnHLHheBNU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"usuario\": \"frecalde\",\n    \"password\": \"frecalde\",\n    \"confirmar\": \"frecalde\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/usuarios/editar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"usuarios",
+						"editar"
+					]
+				},
+				"description": "Para la edición es necesario poder identificar al usuario a partir del ID."
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario edición con error, sin dato quererido para actualizar",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZnJlY2FsZGUiLCJwYXNzd29yZCI6ImZyZWNhbGRlIiwiaWF0IjoxNjQ5MDMxMzQ5LCJleHAiOjE2NDkwMzQ5NDl9.hgvXI9gXF1PSe1SCjSBoFCw0IGUEvzkNpOnHLHheBNU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"password\": \"frecalde\",\n    \"confirmar\": \"frecalde\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/usuarios/editar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"usuarios",
+						"editar"
+					]
+				},
+				"description": "Edición sin propiedad requerida, en este caso usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario edición con error, contraseñas no coinciden",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZnJlY2FsZGUiLCJwYXNzd29yZCI6ImZyZWNhbGRlIiwiaWF0IjoxNjQ5MDMxMzQ5LCJleHAiOjE2NDkwMzQ5NDl9.hgvXI9gXF1PSe1SCjSBoFCw0IGUEvzkNpOnHLHheBNU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"usuario\": \"frecalde\",\n    \"password\": \"frecalde\",\n    \"confirmar\": \"frecalde123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/usuarios/editar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"usuarios",
+						"editar"
+					]
+				},
+				"description": "Edición con contraseñas sin coincidencia."
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario edición con error, identificador inválido",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZnJlY2FsZGUiLCJwYXNzd29yZCI6ImZyZWNhbGRlIiwiaWF0IjoxNjQ5MDMxMzQ5LCJleHAiOjE2NDkwMzQ5NDl9.hgvXI9gXF1PSe1SCjSBoFCw0IGUEvzkNpOnHLHheBNU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 15,\n    \"usuario\": \"frecalde\",\n    \"password\": \"frecalde\",\n    \"confirmar\": \"frecalde\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/usuarios/editar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"usuarios",
+						"editar"
+					]
+				},
+				"description": "Edición sin propuedad requerida, en este caso usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario eliminar exitoso",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZnJlY2FsZGUiLCJwYXNzd29yZCI6ImZyZWNhbGRlIiwiaWF0IjoxNjQ5MDMxMzQ5LCJleHAiOjE2NDkwMzQ5NDl9.hgvXI9gXF1PSe1SCjSBoFCw0IGUEvzkNpOnHLHheBNU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"usuario\": \"frecalde\",\n    \"password\": \"frecalde\",\n    \"confirmar\": \"frecalde\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/usuarios/eliminar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"usuarios",
+						"eliminar"
+					]
+				},
+				"description": "Edición sin propuedad requerida, en este caso usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario eliminar con error, sin identificador",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZnJlY2FsZGUiLCJwYXNzd29yZCI6ImZyZWNhbGRlIiwiaWF0IjoxNjQ5MDMxMzQ5LCJleHAiOjE2NDkwMzQ5NDl9.hgvXI9gXF1PSe1SCjSBoFCw0IGUEvzkNpOnHLHheBNU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"usuario\": \"frecalde\",\n    \"password\": \"frecalde\",\n    \"confirmar\": \"frecalde\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3030/usuarios/eliminar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"usuarios",
+						"eliminar"
+					]
+				},
+				"description": "Edición sin propuedad requerida, en este caso usuario"
+			},
+			"response": []
+		}
+	]
+}

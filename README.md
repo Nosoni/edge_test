@@ -14,12 +14,14 @@ Una vez realizada la autenticación (login) se deberá cambiar el valor del toke
 > ./documentacion.html
 
 # .env
+```
 ENV_RUN="dev"
 APP_PORT="3030"
 SECRET_KEY="f08823e3-c43b-43d1-811c-e36c1216b0ad"
 TOKEN_EXPIRATION_TIME="1h"
 MIN_PASSWORD_LENGTH=5
 FAKE_URL_DB="https://my-json-server.typicode.com/nosoni/edge_test"
+```
 
 # Instalar dependencias del proyecto
 ```

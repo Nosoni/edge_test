@@ -10,7 +10,7 @@ const filtarUsuario = async (usuario) => {
   })
 
   if (!filtrado) {
-    return res.status(400).send("Debe indicar un valor para filtrar")
+    throw new Error("Debe indicar un valor para filtrar")
   }
 
   var config = {
@@ -46,9 +46,12 @@ module.exports = {
     return await peticion(config)
   },
   async filtrar(req, res) {
-    const usuarios = await filtarUsuario(req.body)
-
-    return res.status(200).send(usuarios)
+    await filtarUsuario(req.body)
+      .then(response => {
+        return res.status(200).send(response)
+      }).catch(error => {
+        return res.status(400).send(error.message)
+      })
   },
   async listar(req, res) {
     var config = {
@@ -56,7 +59,13 @@ module.exports = {
       servicio: `${servicio}`,
     };
 
-    return res.status(200).send(await peticion(config))
+    const usuarios_listados = await peticion(config)
+      .then(response => response.map(usuario => {
+        delete usuario.password
+        return usuario
+      }))
+
+    return res.status(200).send(usuarios_listados)
   },
   async editar(req, res) {
     if (!req.body.id) {
@@ -76,6 +85,9 @@ module.exports = {
     }
 
     const usuario_filtrado = await filtarUsuario({ id })
+      .catch(error => {
+        return res.status(400).send(error.message)
+      })
 
     if (usuario_filtrado.length == 0) {
       return res.status(500).send("No existe el usuario a editar.")
